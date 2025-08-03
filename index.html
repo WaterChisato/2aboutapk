@@ -1,15 +1,20 @@
- 
-
-
 <!DOCTYPE html>
-<html>
+<html lang="zh-CN">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>水喝千束</title>
     <style>
+        :root {
+            --primary-color: #4a6fa5;
+            --secondary-color: #ff9a8b;
+            --accent-color: #6c5ce7;
+            --text-color: #333;
+            --light-bg: #f8f9fa;
+        }
+        
         body {
-            font-family: Arial, sans-serif;
+            font-family: 'Segoe UI', 'Microsoft YaHei', sans-serif;
             margin: 0;
             padding: 0;
             display: flex;
@@ -17,50 +22,157 @@
             align-items: center;
             justify-content: center;
             min-height: 100vh;
-            background-color: f5f5f5;
+            background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+            color: var(--text-color);
         }
+        
+        .container {
+            width: 90%;
+            max-width: 500px;
+            background: white;
+            border-radius: 16px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+            padding: 40px;
+            text-align: center;
+            animation: fadeIn 0.6s ease-out;
+        }
+        
         .logo-container {
-            margin-bottom: 40px;
+            margin-bottom: 30px;
+            transition: transform 0.3s ease;
         }
+        
+        .logo-container:hover {
+            transform: scale(1.05);
+        }
+        
         .logo {
-            max-width: 200px;
+            max-width: 180px;
             height: auto;
+            border-radius: 50%;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+            border: 3px solid white;
         }
+        
+        .title {
+            font-size: 24px;
+            font-weight: 600;
+            margin-bottom: 30px;
+            color: var(--primary-color);
+            position: relative;
+        }
+        
+        .title::after {
+            content: '';
+            display: block;
+            width: 60px;
+            height: 3px;
+            background: var(--secondary-color);
+            margin: 10px auto 0;
+            border-radius: 3px;
+        }
+        
         .button-container {
             display: flex;
             flex-direction: column;
             gap: 15px;
-            width: 80%;
-            max-width: 300px;
+            width: 100%;
         }
+        
         .button {
-            padding: 12px 20px;
-            background-color: fff;
-            border: 1px solid ddd;
-            border-radius: 5px;
+            padding: 14px 20px;
+            background: white;
+            border: 2px solid var(--primary-color);
+            border-radius: 50px;
             text-align: center;
             text-decoration: none;
-            color: 333;
+            color: var(--primary-color);
             font-size: 16px;
+            font-weight: 500;
             transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            justify-content: center;
         }
+        
         .button:hover {
-            background-color: f0f0f0;
-            border-color: ccc;
+            background: var(--primary-color);
+            color: white;
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(74, 111, 165, 0.3);
+        }
+        
+        .button:nth-child(2) {
+            border-color: var(--accent-color);
+            color: var(--accent-color);
+        }
+        
+        .button:nth-child(2):hover {
+            background: var(--accent-color);
+            color: white;
+            box-shadow: 0 5px 15px rgba(108, 92, 231, 0.3);
+        }
+        
+        .button:nth-child(3) {
+            border-color: var(--secondary-color);
+            color: var(--secondary-color);
+        }
+        
+        .button:nth-child(3):hover {
+            background: var(--secondary-color);
+            color: white;
+            box-shadow: 0 5px 15px rgba(255, 154, 139, 0.3);
+        }
+        
+        .footer {
+            margin-top: 30px;
+            font-size: 12px;
+            color: #999;
+        }
+        
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        
+        @media (max-width: 480px) {
+            .container {
+                padding: 30px 20px;
+            }
+            
+            .logo {
+                max-width: 150px;
+            }
         }
     </style>
 </head>
 <body>
-    <div class="logo-container">
-        <!-- 这里放置logo图片 -->
-        <img class="logo" src="logo.png" alt="水喝千束logo">
+    <div class="container">
+        <div class="logo-container">
+            <img class="logo" src="./logo.png" alt="水喝千束logo" onerror="handleImageError()">
+        </div>
+        
+        <h1 class="title">水喝千束</h1>
+        
+        <div class="button-container">
+            <a href="https://waterchisato.github.io/aboutApk" class="button">隐私与政策</a>
+            <a href="https://waterchisato.github.io/VideoRule/" class="button">水喝千束视频条约</a>
+            <a href="https://qm.qq.com/q/etTJr0SZ9e" class="button">加入粉丝群联系开发者</a>
+        </div>
+        
+        <div class="footer">
+            ©2025 水喝千束 版权所有
+        </div>
     </div>
-    
-    <div class="button-container">
-        <a href="https://waterchisato.github.io/aboutApk" class="button">隐私与政策</a>
-        <a href="https://waterchisato.github.io/VideoRule/" class="button">水喝千束视频条约</a>
-        <a href="https://qm.qq.com/q/etTJr0SZ9e" class="button">加入粉丝群联系开发者</a>
-    </div>
+
+    <script>
+        function handleImageError() {
+            const logoContainer = document.querySelector('.logo-container');
+            logoContainer.innerHTML = `
+                <div style="width:180px;height:180px;border-radius:50%;background:linear-gradient(135deg,#4a6fa5 0%,#6c5ce7 100%);display:flex;align-items:center;justify-content:center;color:white;font-weight:bold;margin:0 auto;">
+                    水喝千束
+                </div>`;
+        }
+    </script>
 </body>
 </html>
-返回请直接按返回键
